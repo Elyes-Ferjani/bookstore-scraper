@@ -1,15 +1,22 @@
+import requests
 
-# ADD YOUR IMPORTS BEFORE THIS LINE
+url = requests.get("http://books.toscrape.com/")
 
-# Use this function to write information about ONE book
-# to the result file
-# It takes a string as input, this string should have the following format
-# line = book_name,book_price,book_url
+response = requests.get(url)
 
-# Feel free to change this method, if needed
-def write_line(line):
-    with open('./books.csv', 'a') as file:
-        file.write(line)
-        file.write('\n')
+page = response.content
 
-# WRITE YOUR CODE BELOW THIS LINE
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(page, 'html.parser')
+
+inTheMain = soup.find('ol', id="row")
+
+title = inTheMain.find-all('li')
+
+for n in title :
+    print(n.get_text())
+    links = n.find_all('a')
+    for l in links:
+        print(link['href'])
+        print()
